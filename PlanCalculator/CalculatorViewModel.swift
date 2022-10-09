@@ -28,6 +28,8 @@ final class CalculatorViewModel: ObservableObject {
     @Published var giftcardAmounts = [300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400]
     
     
+    
+    
     var currentTotalSpend: Double {
         let newDevice = Double(newDeviceCost)
         let contractTermLength = Double(contractTerm)
@@ -56,9 +58,7 @@ final class CalculatorViewModel: ObservableObject {
                 giftcardAmountTotal = giftcard4Amount
             }
         }
-        
 
-        
         let newTotalAmount = (contractTermLength * Double(newMonthlyPlanCost)) + newDevice - Double(giftcardAmountTotal)
         
         if newTotalAmount < 0 {
@@ -75,6 +75,8 @@ final class CalculatorViewModel: ObservableObject {
             return String("No Saving")
         }
     }
+    
+    
 
 }
 

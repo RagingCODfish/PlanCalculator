@@ -56,14 +56,14 @@ struct ContentView: View {
                 Section(header: Text("Cost of new Device")) {
                     TextField("Cost of new Device", value: $viewModel.newDeviceCost,
                               format: .number)
-//                    .keyboardType(.numbersAndPunctuation)
+                    .keyboardType(.numbersAndPunctuation)
                     .focused($newDeviceFocused)
                 }
 
                 Section(header: Text("Current Monthly cost $\(viewModel.currentMonthlyPlanCost, specifier: "%.2f")")) {
                     TextField("Current Monthly Plan Cost", value: $viewModel.currentMonthlyPlanCost,
                               format: .number)
-//                    .keyboardType(.numbersAndPunctuation)
+                    .keyboardType(.numbersAndPunctuation)
                     .focused($currentMonthySpendFocus)
                 }
 
@@ -83,9 +83,6 @@ struct ContentView: View {
                 .sheet(isPresented: $isPresented) {
                   GiftCardAmountsView(GiftCardAmountsViewModel: viewModel)
                 }
-//                .sheet(isPresented: $showingSheet) {
-//                    GiftCardAmountsView()//viewModel: viewModel)
-//                }
             }
         }
     }

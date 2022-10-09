@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GiftCardAmountsView: View {
     @ObservedObject var GiftCardAmountsViewModel = CalculatorViewModel()
+    
     var body: some View {
         NavigationView {
             Form {
@@ -16,6 +17,7 @@ struct GiftCardAmountsView: View {
                     Picker("$69 Plan Gift Card Amount", selection: $GiftCardAmountsViewModel.giftcard1Amount) {
                         ForEach(GiftCardAmountsViewModel.giftcardAmounts, id: \.self) {
                             Text("$\($0)")
+                            
                         }
                     }
 
