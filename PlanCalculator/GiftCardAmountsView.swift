@@ -18,13 +18,6 @@ struct GiftCardAmountsView: View {
                     Picker("$69 Plan Gift Card Amount", selection: $GiftCardAmountsViewModel.giftcard1Amount) {
                         ForEach(GiftCardAmountsViewModel.giftcardAmounts12, id: \.self) {
                             Text("$\($0)")
-                            
-                        }
-                    }
-
-                    Picker("$99 Plan Gift Card Amount", selection: $GiftCardAmountsViewModel.giftcard2Amount) {
-                        ForEach(GiftCardAmountsViewModel.giftcardAmounts12, id: \.self) {
-                            Text("$\($0)")
                         }
                     }
                 }
@@ -43,11 +36,6 @@ struct GiftCardAmountsView: View {
                         }
                     }
                 }
-//                Button {
-//                    print("Tapped")
-//                } label: {
-//                    APButton(title: "Done")
-//                }
             }
         }
     }

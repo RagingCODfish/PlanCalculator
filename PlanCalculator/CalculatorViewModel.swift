@@ -22,8 +22,8 @@ final class CalculatorViewModel: ObservableObject {
     @Published var giftcard2Amount = 0
     @Published var giftcard3Amount = 400
     @Published var giftcard4Amount = 800
-    @Published var giftcardAmounts12 = [300, 400, 500, 600]
-    @Published var giftcardAmounts24 = [500, 600, 700, 800, 900, 1000, 1100, 1200]
+    @Published var giftcardAmounts12 = [300, 400, 500, 600, 700]
+    @Published var giftcardAmounts24 = [400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
     
     
     
@@ -65,7 +65,6 @@ final class CalculatorViewModel: ObservableObject {
         return newTotalSpend + deviceWithGiftcard
     }
 
-    
     var savings: String {
         if oldPlanWithDevice > newPlanWithDeviceAndGiftcard {
             return String("Saving of $\(Int(oldPlanWithDevice - newPlanWithDeviceAndGiftcard))")
@@ -74,13 +73,5 @@ final class CalculatorViewModel: ObservableObject {
             return String("Extra cost of $\(Int(newPlanWithDeviceAndGiftcard - oldPlanWithDevice))")
         }
     }
-    
-    func refresh() {
-        newDeviceCost = 0.0
-        oldMonthlyPlanCost = 0.0
-    }
-    
-    
-
 }
 

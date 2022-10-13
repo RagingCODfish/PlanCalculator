@@ -34,7 +34,7 @@ struct ContentView: View {
                     
                 }
                 
-                Section(header: Text("Cost of new Device")) {
+                Section(header: Text("Cost of new Device Today")) {
                     HStack {
                         Text("Old Plan")
                         Spacer()
@@ -83,6 +83,7 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    .foregroundColor(.pink)
 
                     Picker("Choose the length of contract", selection: $viewModel.contractTerm) {
                         ForEach(viewModel.terms, id: \.self) {
@@ -95,7 +96,7 @@ struct ContentView: View {
                         if viewModel.newMonthlyPlanCost == 69 {
                             Text("$\(Int(viewModel.giftcard1Amount)) GIFT CARD")
                         } else if viewModel.newMonthlyPlanCost == 99 {
-                            Text("NO GIFT CARD")
+//                            Text("NO GIFT CARD")
                         }
                     } else if viewModel.contractTerm == 24 {
                         if viewModel.newMonthlyPlanCost == 69 {
