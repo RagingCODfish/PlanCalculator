@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GiftCardAmountsView: View {
     @ObservedObject var GiftCardAmountsViewModel = CalculatorViewModel()
-//    @Binding var isPresented: Bool
+    //@Binding var isPresented: Bool
     
     var body: some View {
         NavigationView {
@@ -41,13 +41,10 @@ struct GiftCardAmountsView: View {
                             Text("$\($0)")
 
                         }
-
                     }
-
                 }
-                
 //                Button {
-//                    isPresented.toggle()
+//                    print("Tapped")
 //                } label: {
 //                    APButton(title: "Done")
 //                }

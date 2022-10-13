@@ -19,11 +19,13 @@ final class CalculatorViewModel: ObservableObject {
     
     @Published var giftcardAmount = 0
     @Published var giftcard1Amount = 300
-    @Published var giftcard2Amount = 400
-    @Published var giftcard3Amount = 500
+    @Published var giftcard2Amount = 0
+    @Published var giftcard3Amount = 400
     @Published var giftcard4Amount = 800
-    @Published var giftcardAmounts12 = [300, 400, 500]
+    @Published var giftcardAmounts12 = [300, 400, 500, 600]
     @Published var giftcardAmounts24 = [500, 600, 700, 800, 900, 1000, 1100, 1200]
+    
+    
     
     var oldTotalSpend: Double {
         return oldMonthlyPlanCost * Double(contractTerm)
@@ -38,15 +40,15 @@ final class CalculatorViewModel: ObservableObject {
     }
     
     var newPlanWithDevice: Double {
-        return newTotalSpend + newDeviceCost
+            return newTotalSpend + newDeviceCost
     }
     
-    var newPlanWithDeviceAndGiftcard: Double {
+    var deviceWithGiftcard: Double {
         var giftcardAmountTotal = 0
         if contractTerm == 12 {
             if newMonthlyPlanCost == 69.0 {
                 giftcardAmountTotal = giftcard1Amount
-            } else if newMonthlyPlanCost != 69 {
+            } else if newMonthlyPlanCost == 99 {
                 giftcardAmountTotal = giftcard2Amount
             }
         } else if contractTerm == 24 {
@@ -56,17 +58,26 @@ final class CalculatorViewModel: ObservableObject {
                 giftcardAmountTotal = giftcard4Amount
             }
         }
-        
-        return newPlanWithDevice - Double(giftcardAmountTotal)
+        return newDeviceCost - Double(giftcardAmountTotal)
+    }
+    
+    var newPlanWithDeviceAndGiftcard: Double {
+        return newTotalSpend + deviceWithGiftcard
     }
 
     
     var savings: String {
         if oldPlanWithDevice > newPlanWithDeviceAndGiftcard {
-            return String("Saving of $\(oldPlanWithDevice - newPlanWithDeviceAndGiftcard)0")
+            return String("Saving of $\(Int(oldPlanWithDevice - newPlanWithDeviceAndGiftcard))")
+                
         } else {
-            return String("No Saving")
+            return String("Extra cost of $\(Int(newPlanWithDeviceAndGiftcard - oldPlanWithDevice))")
         }
+    }
+    
+    func refresh() {
+        newDeviceCost = 0.0
+        oldMonthlyPlanCost = 0.0
     }
     
     
