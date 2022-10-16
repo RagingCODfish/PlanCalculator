@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class CalculatorViewModel: ObservableObject {
     @Published var newDeviceCost = 0.0
@@ -18,13 +19,12 @@ final class CalculatorViewModel: ObservableObject {
     @Published var newMonthlyPlanPrice = [69.0, 99.0]
     
     @Published var giftcardAmount = 0
-    @Published var giftcard1Amount = 300
-    @Published var giftcard2Amount = 0
-    @Published var giftcard3Amount = 400
-    @Published var giftcard4Amount = 800
+    @AppStorage("giftcard1Amount") var giftcard1Amount = 300
+    @AppStorage("giftcard2Amount") var giftcard2Amount = 0
+    @AppStorage("giftcard3Amount") var giftcard3Amount = 400
+    @AppStorage("giftcard4Amount") var giftcard4Amount = 800
     @Published var giftcardAmounts12 = [300, 400, 500, 600, 700]
     @Published var giftcardAmounts24 = [400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
-    
     
     
     var oldTotalSpend: Double {
@@ -44,6 +44,27 @@ final class CalculatorViewModel: ObservableObject {
     }
     
     var deviceWithGiftcard: Double {
+        return newDeviceCost - giftcard
+    }
+    
+    var newPlanWithDeviceAndGiftcard: Double {
+        return newTotalSpend + deviceWithGiftcard
+    }
+
+    var savings: String {
+        if oldTotalSpend == 0 {
+            return String("Plan Estimator")
+        } else {
+            if oldPlanWithDevice > newPlanWithDeviceAndGiftcard {
+                return String("Saving of $\(Int(oldPlanWithDevice - newPlanWithDeviceAndGiftcard))")
+                
+            } else {
+                return String("Extra cost of $\(Int(newPlanWithDeviceAndGiftcard - oldPlanWithDevice))")
+            }
+        }
+    }
+    
+    var giftcard: Double {
         var giftcardAmountTotal = 0
         if contractTerm == 12 {
             if newMonthlyPlanCost == 69.0 {
@@ -58,20 +79,17 @@ final class CalculatorViewModel: ObservableObject {
                 giftcardAmountTotal = giftcard4Amount
             }
         }
-        return newDeviceCost - Double(giftcardAmountTotal)
+        return Double(giftcardAmountTotal)
     }
     
-    var newPlanWithDeviceAndGiftcard: Double {
-        return newTotalSpend + deviceWithGiftcard
+    var calculatedMonthlySpend: Double {
+        return (newTotalSpend - giftcard) / Double(contractTerm)
     }
-
-    var savings: String {
-        if oldPlanWithDevice > newPlanWithDeviceAndGiftcard {
-            return String("Saving of $\(Int(oldPlanWithDevice - newPlanWithDeviceAndGiftcard))")
-                
-        } else {
-            return String("Extra cost of $\(Int(newPlanWithDeviceAndGiftcard - oldPlanWithDevice))")
-        }
+    
+    func refresh() {
+        newDeviceCost = 0.0
+        oldMonthlyPlanCost = 0.0
     }
+    
 }
 

@@ -14,6 +14,7 @@ struct GiftCardAmountsView: View {
     var body: some View {
         NavigationView {
             Form {
+                
                 Section(header: Text("12 Month Plan Gift Cards")) {
                     Picker("$69 Plan Gift Card Amount", selection: $GiftCardAmountsViewModel.giftcard1Amount) {
                         ForEach(GiftCardAmountsViewModel.giftcardAmounts12, id: \.self) {
@@ -36,6 +37,10 @@ struct GiftCardAmountsView: View {
                         }
                     }
                 }
+                
+//                Section(header: Text("QR Code")) {
+//                    Text("Still coming")
+//                }
             }
         }
     }
