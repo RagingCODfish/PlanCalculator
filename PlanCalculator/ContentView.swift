@@ -15,7 +15,6 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-//            if #available(iOS 16.0, *) {
             if #available(iOS 16.0, *) {
                 Form {
                     Section(header: Text("Total over \(viewModel.contractTerm) months with new Device")) {
@@ -31,7 +30,7 @@ struct ContentView: View {
                         HStack {
                             Text("JB Mobile Plan")
                             Spacer()
-                            Text("$\(viewModel.oldPlanWithDevice, specifier: "%.2f")")
+                            Text("$\(viewModel.newPlanWithDeviceAndGiftcard, specifier: "%.2f")")
                                 .foregroundColor(viewModel.newPlanWithDeviceAndGiftcard > viewModel.oldPlanWithDevice ? .red : .green)
                         }
                     }
@@ -62,7 +61,6 @@ struct ContentView: View {
                             }
                         }
                     }
-                    
                     
                     Section(header: Text("Current Monthly Plan Cost $\(viewModel.oldMonthlyPlanCost, specifier: "%.2f")")) {
                         TextField("Current Monthly Plan Cost", value: $viewModel.oldMonthlyPlanCost,
@@ -99,7 +97,8 @@ struct ContentView: View {
                         }
                     }
                 }
-                .scrollDismissesKeyboard(.immediately)
+                    .scrollDismissesKeyboard(.immediately)
+
                 .refreshable {
                     viewModel.refresh()
                 }
@@ -184,7 +183,6 @@ struct ContentView: View {
                         .focused($keyboard)
                     }
                     
-                    
                     Section(header: Text("$\(viewModel.newMonthlyPlanCost, specifier: "%.2f") over \(viewModel.contractTerm) Months = $\(viewModel.newTotalSpend, specifier: "%.2f")\n$\(viewModel.calculatedMonthlySpend, specifier: "%.2f") per month")) {
                         Picker("New Monthly Plan", selection: $viewModel.newMonthlyPlanCost) {
                             ForEach(viewModel.newMonthlyPlanPrice, id: \.self) {
@@ -227,7 +225,6 @@ struct ContentView: View {
                     }
                 }
             }
-
         }
     }
 }
