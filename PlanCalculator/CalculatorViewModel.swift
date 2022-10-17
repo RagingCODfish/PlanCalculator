@@ -10,12 +10,14 @@ import SwiftUI
 
 final class CalculatorViewModel: ObservableObject {
     @Published var newDeviceCost = 0.0
+    @Published var mobileExtras = false
+    @AppStorage("onSale") var onSale = false
     
-    @Published var contractTerm = 12
+    @Published var contractTerm = 0
     @Published var terms = [12, 24]
     
     @Published var oldMonthlyPlanCost = 0.0
-    @Published var newMonthlyPlanCost = 69.0
+    @Published var newMonthlyPlanCost = 0.0
     @Published var newMonthlyPlanPrice = [69.0, 99.0]
     
     @Published var giftcardAmount = 0
@@ -50,16 +52,20 @@ final class CalculatorViewModel: ObservableObject {
     var newPlanWithDeviceAndGiftcard: Double {
         return newTotalSpend + deviceWithGiftcard
     }
+    
+    var newPlanDeviceGiftcardMobileExtras: Double {
+        return newPlanWithDeviceAndGiftcard + (mobileExtrasMonthly * Double(contractTerm))
+    }
 
     var savings: String {
         if oldTotalSpend == 0 {
             return String("Plan Estimator")
         } else {
-            if oldPlanWithDevice > newPlanWithDeviceAndGiftcard {
-                return String("Saving of $\(Int(oldPlanWithDevice - newPlanWithDeviceAndGiftcard))")
+            if oldPlanWithDevice > newPlanDeviceGiftcardMobileExtras {
+                return String("Saving of $\(Int(oldPlanWithDevice - newPlanDeviceGiftcardMobileExtras))")
                 
             } else {
-                return String("Extra cost of $\(Int(newPlanWithDeviceAndGiftcard - oldPlanWithDevice))")
+                return String("Extra cost of $\(Int(newPlanDeviceGiftcardMobileExtras - oldPlanWithDevice))")
             }
         }
     }
@@ -86,9 +92,27 @@ final class CalculatorViewModel: ObservableObject {
         return (newTotalSpend - giftcard) / Double(contractTerm)
     }
     
+    
+    
+    var mobileExtrasMonthly: Double {
+        
+        if mobileExtras {
+            if onSale {
+                return 9.99
+            } else {
+                return 12.99
+            }
+        } else {
+            return 0.0
+        }
+    }
+    
     func refresh() {
         newDeviceCost = 0.0
         oldMonthlyPlanCost = 0.0
+        mobileExtras = false
+        contractTerm = 0
+        newMonthlyPlanCost = 0.0
     }
     
 }

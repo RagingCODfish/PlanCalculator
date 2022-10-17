@@ -10,6 +10,7 @@ import SwiftUI
 struct GiftCardAmountsView: View {
     @ObservedObject var GiftCardAmountsViewModel = CalculatorViewModel()
     //@Binding var isPresented: Bool
+//    @Binding var onSale: Bool
     
     var body: some View {
         NavigationView {
@@ -38,9 +39,9 @@ struct GiftCardAmountsView: View {
                     }
                 }
                 
-//                Section(header: Text("QR Code")) {
-//                    Text("Still coming")
-//                }
+                Section(header: Text("Mobile Extras price")) {
+                    Toggle("Is Mobile Extras on sale?", isOn: $GiftCardAmountsViewModel.onSale)
+                }
             }
         }
     }
