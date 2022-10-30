@@ -6,12 +6,12 @@
 //
 
 import Foundation
+import StoreKit
 import SwiftUI
 
 final class CalculatorViewModel: ObservableObject {
     @Published var newDeviceCost = 0.0
-    @Published var mobileExtras = false
-    @AppStorage("onSale") var onSale = false
+    @AppStorage("mobileExtras") var mobileExtras = false
     
     @Published var contractTerm = 0
     @Published var terms = [12, 24]
@@ -28,9 +28,14 @@ final class CalculatorViewModel: ObservableObject {
     @Published var giftcardAmounts12 = [300, 400, 500, 600, 700]
     @Published var giftcardAmounts24 = [400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
     
+    @Published var mobileExtrasPrice = 0.0
+    @Published var mobileExtrasOptions = [0.0, 9.99, 12.99]
+    
+
+    
     
     var oldTotalSpend: Double {
-        return oldMonthlyPlanCost * Double(contractTerm)
+        return oldMonthlyPlanCost  * Double(contractTerm)
     }
     
     var oldPlanWithDevice: Double {
@@ -54,7 +59,7 @@ final class CalculatorViewModel: ObservableObject {
     }
     
     var newPlanDeviceGiftcardMobileExtras: Double {
-        return newPlanWithDeviceAndGiftcard + (mobileExtrasMonthly * Double(contractTerm))
+        return newPlanWithDeviceAndGiftcard + (mobileExtrasPrice * Double(contractTerm))
     }
 
     var savings: String {
@@ -89,31 +94,19 @@ final class CalculatorViewModel: ObservableObject {
     }
     
     var calculatedMonthlySpend: Double {
-        return (newTotalSpend - giftcard) / Double(contractTerm)
-    }
-    
-    
-    
-    var mobileExtrasMonthly: Double {
-        
-        if mobileExtras {
-            if onSale {
-                return 9.99
-            } else {
-                return 12.99
-            }
-        } else {
+        if contractTerm == 0 {
             return 0.0
+        } else {
+            return (newTotalSpend - giftcard) / Double(contractTerm)
         }
     }
     
     func refresh() {
         newDeviceCost = 0.0
         oldMonthlyPlanCost = 0.0
-        mobileExtras = false
+        mobileExtrasPrice = 0.0
         contractTerm = 0
         newMonthlyPlanCost = 0.0
     }
-    
 }
 
