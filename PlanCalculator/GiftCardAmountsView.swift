@@ -5,16 +5,20 @@
 //  Created by Zach Uptin on 9/10/2022.
 //
 
-import StoreKit
+import CoreImage
+import CoreImage.CIFilterBuiltins
 import SwiftUI
 
 struct GiftCardAmountsView: View {
     @ObservedObject var GiftCardAmountsViewModel = CalculatorViewModel()
     @State private var showingQRCode = false
-    @Environment(\.requestReview) var requestReview
+    @State private var address = "https://apps.apple.com/us/app/plancalculator/id6443752965"
+    @State private var qrCode = UIImage()
+    
+    let context = CIContext()
+    let filter = CIFilter.qrCodeGenerator()
     
     var body: some View {
-        
         NavigationView {
             Form {
                 Section(header: Text("12 Month Plan Gift Cards")) {
@@ -53,13 +57,30 @@ struct GiftCardAmountsView: View {
                     }
                 }
                 
-                Section(header: Text("Review")) {
-                    Button("Rate App") {
-                        requestReview()
-                    }
-                }
+                Image(uiImage: qrCode)
+                    .resizable()
+                    .interpolation(.none)
+                    .scaledToFit()
+//                    .frame(width: 300, height: 300)
             }
         }
+        .onAppear(perform: updateCode)
+    }
+    
+    func updateCode() {
+        qrCode = generateQRCode(from: "\(address)")
+    }
+    
+    func generateQRCode(from string: String) -> UIImage {
+        filter.message = Data(string.utf8)
+        
+        if let outputImage = filter.outputImage {
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                return UIImage(cgImage: cgimg)
+            }
+        }
+        
+        return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
 }
 

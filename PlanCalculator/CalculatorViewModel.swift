@@ -6,18 +6,18 @@
 //
 
 import Foundation
-import StoreKit
 import SwiftUI
 
 final class CalculatorViewModel: ObservableObject {
     @Published var newDeviceCost = 0.0
     @AppStorage("mobileExtras") var mobileExtras = false
     
-    @Published var contractTerm = 0
+    @Published var contractTerm = 12
     @Published var terms = [12, 24]
+    @Published var ninetyNineTerms = [24]
     
     @Published var oldMonthlyPlanCost = 0.0
-    @Published var newMonthlyPlanCost = 0.0
+    @Published var newMonthlyPlanCost = 69.0
     @Published var newMonthlyPlanPrice = [69.0, 99.0]
     
     @Published var giftcardAmount = 0
@@ -31,11 +31,17 @@ final class CalculatorViewModel: ObservableObject {
     @Published var mobileExtrasPrice = 0.0
     @Published var mobileExtrasOptions = [0.0, 9.99, 12.99]
     
-
-    
+    @Published var servicesCount = 1
+    @Published var services = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @Published var selectedTelstraPlan1 = 68
+    @Published var selectedTelstraPlan2 = 68
+    @Published var selectedTelstraPlan3 = 68
+    @Published var selectedTelstraPlan4 = 68
+    @Published var selectedTelstraPlan5 = 68
+    @Published var telstraPlans = [47, 58, 68, 89]
     
     var oldTotalSpend: Double {
-        return oldMonthlyPlanCost  * Double(contractTerm)
+        return oldMonthlyPlanCost * Double(contractTerm)
     }
     
     var oldPlanWithDevice: Double {
@@ -47,7 +53,7 @@ final class CalculatorViewModel: ObservableObject {
     }
     
     var newPlanWithDevice: Double {
-            return newTotalSpend + newDeviceCost
+        return newTotalSpend + newDeviceCost
     }
     
     var deviceWithGiftcard: Double {
@@ -64,7 +70,7 @@ final class CalculatorViewModel: ObservableObject {
 
     var savings: String {
         if oldTotalSpend == 0 {
-            return String("Plan Estimator")
+            return String("JB Plans")
         } else {
             if oldPlanWithDevice > newPlanDeviceGiftcardMobileExtras {
                 return String("Saving of $\(Int(oldPlanWithDevice - newPlanDeviceGiftcardMobileExtras))")
@@ -75,12 +81,14 @@ final class CalculatorViewModel: ObservableObject {
         }
     }
     
+    
     var giftcard: Double {
         var giftcardAmountTotal = 0
         if contractTerm == 12 {
             if newMonthlyPlanCost == 69.0 {
                 giftcardAmountTotal = giftcard1Amount
             } else if newMonthlyPlanCost == 99 {
+                contractTerm = 24
                 giftcardAmountTotal = giftcard2Amount
             }
         } else if contractTerm == 24 {
@@ -108,5 +116,7 @@ final class CalculatorViewModel: ObservableObject {
         contractTerm = 0
         newMonthlyPlanCost = 0.0
     }
+    
+    
 }
 
