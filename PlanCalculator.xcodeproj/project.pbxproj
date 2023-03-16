@@ -11,11 +11,11 @@
 		440F379828F165E600F238A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440F379728F165E600F238A9 /* ContentView.swift */; };
 		440F379A28F165E800F238A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 440F379928F165E800F238A9 /* Assets.xcassets */; };
 		440F379D28F165E800F238A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 440F379C28F165E800F238A9 /* Preview Assets.xcassets */; };
-		44B6D57428F2E8C60009DD8C /* APButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B6D57328F2E8C60009DD8C /* APButton.swift */; };
+		44B5C60629504DA4007A628F /* CloudkitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B5C60529504DA4007A628F /* CloudkitManager.swift */; };
+		44B5C60829504FDA007A628F /* Giftcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B5C60729504FDA007A628F /* Giftcard.swift */; };
+		44B5C60A29505214007A628F /* CKRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B5C60929505214007A628F /* CKRecord.swift */; };
 		44CCC23428F181F3004235EC /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CCC23328F181F3004235EC /* CalculatorViewModel.swift */; };
 		44CCC25228F1BBAF004235EC /* GiftCardAmountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CCC25128F1BBAF004235EC /* GiftCardAmountsView.swift */; };
-		44ECFCBE291BF45800B1D736 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECFCBD291BF45800B1D736 /* HomeView.swift */; };
-		44ECFCC0291BF4A500B1D736 /* TelstraPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECFCBF291BF4A500B1D736 /* TelstraPlansView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,11 +24,13 @@
 		440F379728F165E600F238A9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		440F379928F165E800F238A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		440F379C28F165E800F238A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		44B6D57328F2E8C60009DD8C /* APButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APButton.swift; path = ../../../SeanAllenApps/Appetizers/Appetizers/Views/Components/APButton.swift; sourceTree = "<group>"; };
+		4496F8B82927B70E00BEBBD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		44B5C60429503CDE007A628F /* PlanCalculator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlanCalculator.entitlements; sourceTree = "<group>"; };
+		44B5C60529504DA4007A628F /* CloudkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudkitManager.swift; sourceTree = "<group>"; };
+		44B5C60729504FDA007A628F /* Giftcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Giftcard.swift; sourceTree = "<group>"; };
+		44B5C60929505214007A628F /* CKRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKRecord.swift; sourceTree = "<group>"; };
 		44CCC23328F181F3004235EC /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
 		44CCC25128F1BBAF004235EC /* GiftCardAmountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCardAmountsView.swift; sourceTree = "<group>"; };
-		44ECFCBD291BF45800B1D736 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		44ECFCBF291BF4A500B1D736 /* TelstraPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelstraPlansView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,15 +63,17 @@
 		440F379428F165E600F238A9 /* PlanCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				44B5C60429503CDE007A628F /* PlanCalculator.entitlements */,
+				4496F8B82927B70E00BEBBD4 /* Info.plist */,
 				440F379528F165E600F238A9 /* PlanCalculatorApp.swift */,
-				44ECFCBD291BF45800B1D736 /* HomeView.swift */,
-				44ECFCBF291BF4A500B1D736 /* TelstraPlansView.swift */,
 				440F379728F165E600F238A9 /* ContentView.swift */,
 				440F379928F165E800F238A9 /* Assets.xcassets */,
 				440F379B28F165E800F238A9 /* Preview Content */,
 				44CCC23328F181F3004235EC /* CalculatorViewModel.swift */,
 				44CCC25128F1BBAF004235EC /* GiftCardAmountsView.swift */,
-				44B6D57328F2E8C60009DD8C /* APButton.swift */,
+				44B5C60529504DA4007A628F /* CloudkitManager.swift */,
+				44B5C60729504FDA007A628F /* Giftcard.swift */,
+				44B5C60929505214007A628F /* CKRecord.swift */,
 			);
 			path = PlanCalculator;
 			sourceTree = "<group>";
@@ -153,12 +157,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				440F379828F165E600F238A9 /* ContentView.swift in Sources */,
+				44B5C60629504DA4007A628F /* CloudkitManager.swift in Sources */,
 				440F379628F165E600F238A9 /* PlanCalculatorApp.swift in Sources */,
 				44CCC25228F1BBAF004235EC /* GiftCardAmountsView.swift in Sources */,
-				44ECFCBE291BF45800B1D736 /* HomeView.swift in Sources */,
-				44B6D57428F2E8C60009DD8C /* APButton.swift in Sources */,
-				44ECFCC0291BF4A500B1D736 /* TelstraPlansView.swift in Sources */,
 				44CCC23428F181F3004235EC /* CalculatorViewModel.swift in Sources */,
+				44B5C60829504FDA007A628F /* Giftcard.swift in Sources */,
+				44B5C60A29505214007A628F /* CKRecord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,12 +289,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = PlanCalculator/PlanCalculator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PlanCalculator/Preview Content\"";
 				DEVELOPMENT_TEAM = Z95C3Y6UPR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PlanCalculator/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Plan Calculator";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -302,7 +309,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zacharyuptin.PlanCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -320,12 +327,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = PlanCalculator/PlanCalculator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PlanCalculator/Preview Content\"";
 				DEVELOPMENT_TEAM = Z95C3Y6UPR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PlanCalculator/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Plan Calculator";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -337,7 +347,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zacharyuptin.PlanCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

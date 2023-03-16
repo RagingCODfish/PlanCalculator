@@ -20,28 +20,55 @@ struct GiftCardAmountsView: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                Section(header: Text("12 Month Plan Gift Cards")) {
-                    Picker("$69 Plan Gift Card Amount", selection: $GiftCardAmountsViewModel.giftcard1Amount) {
-                        ForEach(GiftCardAmountsViewModel.giftcardAmounts12, id: \.self) {
+			Form {
+				
+			/// New Number Plans
+                Section(header: Text("New Number Plans")) {
+					Picker("New 12 Month $69", selection: $GiftCardAmountsViewModel.giftcard1Amount) {
+						ForEach(GiftCardAmountsViewModel.giftcardAmounts12, id: \.self) {
+							Text("$\($0)")
+						}
+					}
+
+                    Picker("New 24 Month $69", selection: $GiftCardAmountsViewModel.giftcard3Amount) {
+                        ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
                             Text("$\($0)")
+                        }
+                    }
+
+                    Picker("New 24 Month $99", selection: $GiftCardAmountsViewModel.giftcard4Amount) {
+                        ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
+                            Text("$\($0)")
+
                         }
                     }
                 }
-
-                Section(header: Text("24 Month Plan Gift CardS")) {
-                    Picker("$69 Plan Gift Card Amount", selection: $GiftCardAmountsViewModel.giftcard3Amount) {
-                        ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
-                            Text("$\($0)")
-                        }
-                    }
-
-                    Picker("$99 Plan Gift Card Amount", selection: $GiftCardAmountsViewModel.giftcard4Amount) {
-                        ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
-                            Text("$\($0)")
-
-                        }
-                    }
+				
+				/// Port Number Plans
+				Section(header: Text("Port Number Plans")) {
+					Picker("Port 12 Month $69", selection: $GiftCardAmountsViewModel.giftcard5Amount) {
+						ForEach(GiftCardAmountsViewModel.giftcardAmounts12, id: \.self) {
+							Text("$\($0)")
+						}
+					}
+					
+					Picker("Port 24 Month $69", selection: $GiftCardAmountsViewModel.giftcard7Amount) {
+						ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
+							Text("$\($0)")
+						}
+					}
+					
+					Picker("Port 24 Month $99", selection: $GiftCardAmountsViewModel.giftcard8Amount) {
+						ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
+							Text("$\($0)")
+						}
+					}
+				}
+				
+				
+                
+                Section(header: Text("Monthly Credit")) {
+                    Toggle("Apply $10 Monthly credit", isOn: $GiftCardAmountsViewModel.creditIsOn)
                 }
                 
                 Section(header: Text("Mobile Extras")) {
@@ -51,17 +78,13 @@ struct GiftCardAmountsView: View {
                 Section(header: Text("QR Code")) {
                     Toggle("Share App with staff", isOn: $showingQRCode)
                     if showingQRCode {
-                        Image("qrcode")
+                        Image(uiImage: qrCode)
                             .resizable()
+                            .interpolation(.none)
                             .scaledToFit()
                     }
                 }
-                
-                Image(uiImage: qrCode)
-                    .resizable()
-                    .interpolation(.none)
-                    .scaledToFit()
-//                    .frame(width: 300, height: 300)
+
             }
         }
         .onAppear(perform: updateCode)
