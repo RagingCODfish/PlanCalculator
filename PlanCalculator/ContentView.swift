@@ -11,6 +11,7 @@ struct ContentView: View {
     @StateObject var GiftCardAmountsViewModel = CalculatorViewModel()
     @StateObject var viewModel = CalculatorViewModel()
     @State var isPresented = false
+    @State var phoneDealSheet = false
     @FocusState private var keyboard: Bool
     
 	fileprivate func MainView() -> Form<TupleView<(Section<Text, TupleView<(HStack<TupleView<(Text, Spacer, Text)>>, HStack<TupleView<(Text, Spacer, _ConditionalContent<Text, Text>)>>)>, EmptyView>, Section<Text, TupleView<(HStack<TupleView<(Text, Spacer, _ConditionalContent<Text, Text>)>>, HStack<TupleView<(Text, Spacer, _ConditionalContent<Text, Text>)>>)>, EmptyView>, Section<Text, some View, EmptyView>, Section<Text, some View, EmptyView>, Section<Text, TupleView<(_ConditionalContent<Text, HStack<TupleView<(Text, Spacer, _ConditionalContent<Text, Text>)>>>, some View, (some View)?, (some View)?, Text??, (some View)?)>, EmptyView>)>> {
@@ -41,7 +42,7 @@ struct ContentView: View {
 			/// Upfront amount due today
 			Section(header: Text("Upfront amount due today")) {
 				HStack {
-					Text("Old Plan")
+					Text("Old Plan Total")
 					Spacer()
 					if viewModel.newDeviceCost > 0 {
 						Text("$\(viewModel.newDeviceCost, specifier: "%.2f")")
@@ -53,7 +54,7 @@ struct ContentView: View {
 				}
 				
 				HStack {
-					Text("New Plan")
+					Text("New Plan Total")
 					Spacer()
 					if viewModel.deviceWithGiftcard > 0 {
 						Text("$\(viewModel.deviceWithGiftcard, specifier: "%.2f")")
@@ -145,29 +146,29 @@ struct ContentView: View {
 	var body: some View {
         NavigationView {
             if #available(iOS 16.0, *) {
-				MainView()
-                .scrollDismissesKeyboard(.immediately)
-                .refreshable {
-                    viewModel.refresh()
-                }
-                .navigationTitle(viewModel.savings)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Spacer()
-                        Button("Done") {
-                            keyboard = false
+                    MainView()
+                        .scrollDismissesKeyboard(.immediately)
+                        .refreshable {
+                            viewModel.refresh()
                         }
-                    }
-                }
-                .toolbar {
-                    Button("Settings") {
-                        isPresented.toggle()
-                    }
-                    .sheet(isPresented: $isPresented) {
-                        GiftCardAmountsView(GiftCardAmountsViewModel: viewModel)
-                    }
-                }
+                        .navigationTitle(viewModel.savings)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Spacer()
+                                Button("Done") {
+                                    keyboard = false
+                                }
+                            }
+                        }
+                        .toolbar {
+                            Button("Settings") {
+                                isPresented.toggle()
+                            }
+                            .sheet(isPresented: $isPresented) {
+                                GiftCardAmountsView(GiftCardAmountsViewModel: viewModel)
+                            }
+                        }
             } else {
                 // Fallback on earlier versions
                 MainView()

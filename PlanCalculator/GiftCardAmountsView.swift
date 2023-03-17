@@ -25,10 +25,10 @@ struct GiftCardAmountsView: View {
 			/// New Number Plans
                 Section(header: Text("New Number Plans")) {
 					Picker("New 12 Month $69", selection: $GiftCardAmountsViewModel.giftcard1Amount) {
-						ForEach(GiftCardAmountsViewModel.giftcardAmounts12, id: \.self) {
-							Text("$\($0)")
-						}
-					}
+                        ForEach(GiftCardAmountsViewModel.giftcardAmounts12, id: \.self) {
+                            Text("$\($0)")
+                        }
+                    }
 
                     Picker("New 24 Month $69", selection: $GiftCardAmountsViewModel.giftcard3Amount) {
                         ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
@@ -69,13 +69,7 @@ struct GiftCardAmountsView: View {
                 
                 Section(header: Text("Monthly Credit")) {
                     Toggle("Apply $10 Monthly credit", isOn: $GiftCardAmountsViewModel.creditIsOn)
-                }
-                
-                Section(header: Text("Mobile Extras")) {
-                    Toggle("Show Mobile Extras", isOn: $GiftCardAmountsViewModel.mobileExtras) 
-                }
-                
-                Section(header: Text("QR Code")) {
+                    Toggle("Show Mobile Extras", isOn: $GiftCardAmountsViewModel.mobileExtras)
                     Toggle("Share App with staff", isOn: $showingQRCode)
                     if showingQRCode {
                         Image(uiImage: qrCode)
