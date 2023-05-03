@@ -24,12 +24,6 @@ struct GiftCardAmountsView: View {
 				
 			/// New Number Plans
                 Section(header: Text("New Number Plans")) {
-					Picker("New 12 Month $69", selection: $GiftCardAmountsViewModel.giftcard1Amount) {
-                        ForEach(GiftCardAmountsViewModel.giftcardAmounts12, id: \.self) {
-                            Text("$\($0)")
-                        }
-                    }
-
                     Picker("New 24 Month $69", selection: $GiftCardAmountsViewModel.giftcard3Amount) {
                         ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
                             Text("$\($0)")
@@ -46,12 +40,6 @@ struct GiftCardAmountsView: View {
 				
 				/// Port Number Plans
 				Section(header: Text("Port Number Plans")) {
-					Picker("Port 12 Month $69", selection: $GiftCardAmountsViewModel.giftcard5Amount) {
-						ForEach(GiftCardAmountsViewModel.giftcardAmounts12, id: \.self) {
-							Text("$\($0)")
-						}
-					}
-					
 					Picker("Port 24 Month $69", selection: $GiftCardAmountsViewModel.giftcard7Amount) {
 						ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
 							Text("$\($0)")
@@ -69,7 +57,6 @@ struct GiftCardAmountsView: View {
                 
                 Section(header: Text("Monthly Credit")) {
                     Toggle("Apply $10 Monthly credit", isOn: $GiftCardAmountsViewModel.creditIsOn)
-                    Toggle("Show Mobile Extras", isOn: $GiftCardAmountsViewModel.mobileExtras)
                     Toggle("Share App with staff", isOn: $showingQRCode)
                     if showingQRCode {
                         Image(uiImage: qrCode)
@@ -78,7 +65,6 @@ struct GiftCardAmountsView: View {
                             .scaledToFit()
                     }
                 }
-
             }
         }
         .onAppear(perform: updateCode)
@@ -96,7 +82,6 @@ struct GiftCardAmountsView: View {
                 return UIImage(cgImage: cgimg)
             }
         }
-        
         return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
 }

@@ -50,7 +50,7 @@ final class CalculatorViewModel: ObservableObject {
 	
 	
     @Published var giftcardAmounts12 = [300, 400, 500, 600, 700, 800, 900]
-    @Published var giftcardAmounts24 = [400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400]
+    @Published var giftcardAmounts24 = [400, 450, 500, 550, 600, 650, 700, 750,  800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450]
     
     @Published var mobileExtrasPrice = 0.0
     @Published var mobileExtrasOptions = [0.0, 9.99, 12.99]
