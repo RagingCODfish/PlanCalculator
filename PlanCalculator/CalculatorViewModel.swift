@@ -16,97 +16,39 @@ final class CalculatorViewModel: ObservableObject {
 	@Published var portOptions = [false, true]
     
     @Published var contractTerm = 24
-    @Published var terms = [12, 24]
+    @Published var terms = [1, 24]
 //    @Published var ninetyNineTerms = [24]
     
     @Published var oldMonthlyPlanCost = 0.0
-	@Published var newMonthlyPlanCost = 0.0
+    @Published var newMonthlyPlanCost = 69.0
     @Published var newMonthlyPlanPrice = [69.0, 99.0]
     
     @Published var giftcardAmount = 0
-		// New
-    @AppStorage("giftcard1Amount") var giftcard1Amount = 300 	// 69 12 month
-    @AppStorage("giftcard2Amount") var giftcard2Amount = 0		// 99 12 month
-    @AppStorage("giftcard3Amount") var giftcard3Amount = 400	// 69 24 month
-    @AppStorage("giftcard4Amount") var giftcard4Amount = 800	// 99 24 month
-	// Port
-	@AppStorage("giftcard5Amount") var giftcard5Amount = 300	// 69 12 month
-	@AppStorage("giftcard6Amount") var giftcard6Amount = 0		// 99 12 month
-	@AppStorage("giftcard7Amount") var giftcard7Amount = 400	// 69 24 month
-	@AppStorage("giftcard8Amount") var giftcard8Amount = 800	// 99 24 month
-	
-	@Published var newOrPortSelection = ""
-	@Published var newOrPortOptions = ["New Number", "Port Number"]
-	
-	
-//	@Published var new69212month = 0
-//	@Published var new6924month = 0
-//	@Published var new9924month = 0
-//	@Published var port6912month = 0
-//	@Published var port6924month = 0
-//	@Published var port9924month = 0
-//	@Published var upgrade9924month = 0
 
-	
-	
-    @Published var giftcardAmounts12 = [300, 400, 500, 600, 700, 800, 900]
-    @Published var giftcardAmounts24 = [400, 450, 500, 550, 600, 650, 700, 750,  800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450]
-    
-    @Published var mobileExtrasPrice = 0.0
-    @Published var mobileExtrasOptions = [0.0, 9.99, 12.99]
+
+    @AppStorage("giftcard1Amount") var giftcard1Amount = 450	// 69 24 month
+    @AppStorage("giftcard2Amount") var giftcard2Amount = 800	// 99 24 month
+
+    @Published var giftcardAmounts24 = [450, 500, 550, 600, 650, 700, 750,  800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450]
+
     
     @AppStorage("creditIsOn") var creditIsOn = false
     @Published var credit = 0.0
-//    @Published var creditOptions = [0.0, 10.0]
 	
 
-	var giftcard: Double {
-		var giftcardAmountTotal = 0
-		if newOrPortSelection == "New Number" {
-			if newMonthlyPlanCost == 69.0 {
-				if contractTerm == 12 {
-					giftcardAmountTotal = giftcard1Amount
-				} else if contractTerm == 24 {
-					giftcardAmountTotal = giftcard3Amount
-				} else {
-					giftcardAmountTotal = 0
-				}
-			} else if newMonthlyPlanCost == 99.0 {
-				if contractTerm == 12 {
-					contractTerm = 24
-					giftcardAmountTotal = giftcard4Amount
-				} else {
-					giftcardAmountTotal = giftcard4Amount
-				}
-			} else {
-				giftcardAmountTotal = 0
-			}
-		} else if newOrPortSelection == "Port Number" {
-			if newMonthlyPlanCost == 69.0 {
-				if contractTerm == 12 {
-					giftcardAmountTotal = giftcard5Amount
-				} else {
-					giftcardAmountTotal = giftcard7Amount
-				}
-			} else if newMonthlyPlanCost == 99.0 {
-				if contractTerm == 12 {
-                    DispatchQueue.main.async {
-                        self.contractTerm = 24
-                    }
-					giftcardAmountTotal = giftcard8Amount
-				} else {
-					giftcardAmountTotal = giftcard8Amount
-				}
-			} else {
-				giftcardAmountTotal = 0
-			}
-		} else {
-			giftcardAmountTotal = 0
-		}
-		return Double(giftcardAmountTotal)
-	}
-	
-	
+    var giftcard: Double {
+        var giftcardAmountTotal = 0
+
+        if newMonthlyPlanCost == 69.0 {
+            giftcardAmountTotal = giftcard1Amount
+        } else {
+            giftcardAmountTotal = giftcard2Amount
+        }
+        return Double(giftcardAmountTotal)
+    }
+
+
+
     var oldTotalSpend: Double {
         return oldMonthlyPlanCost * Double(contractTerm)
     }
@@ -135,9 +77,6 @@ final class CalculatorViewModel: ObservableObject {
         return newTotalSpend + deviceWithGiftcard
     }
     
-    var newPlanDeviceGiftcardMobileExtras: Double {
-        return newPlanWithDeviceAndGiftcard + (mobileExtrasPrice * Double(contractTerm))
-    }
     
     var creditAmount: Double {
         if creditIsOn {
@@ -151,11 +90,11 @@ final class CalculatorViewModel: ObservableObject {
         if oldTotalSpend == 0 {
             return String("Plan Estimator")
         } else {
-            if oldPlanWithDevice > newPlanDeviceGiftcardMobileExtras {
-                return String("Saving of $\(Int(oldPlanWithDevice - newPlanDeviceGiftcardMobileExtras))")
-                
+            if oldPlanWithDevice > newPlanWithDeviceAndGiftcard {
+                return String("Saving of $\(Int(oldPlanWithDevice - newPlanWithDeviceAndGiftcard))")
+
             } else {
-                return String("Extra cost of $\(Int(newPlanDeviceGiftcardMobileExtras - oldPlanWithDevice)) ")
+                return String("Extra cost of $\(Int(newPlanWithDeviceAndGiftcard - oldPlanWithDevice)) ")
             }
         }
     }
@@ -171,10 +110,10 @@ final class CalculatorViewModel: ObservableObject {
     func refresh() {
         newDeviceCost = 0.0
         oldMonthlyPlanCost = 0.0
-        mobileExtrasPrice = 0.0
+//        mobileExtrasPrice = 0.0
         contractTerm = 24
         newMonthlyPlanCost = 0.0
-		newOrPortSelection = ""
+//		newOrPortSelection = ""
     }
 	
 //	func getGiftcard() {

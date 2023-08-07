@@ -23,35 +23,20 @@ struct GiftCardAmountsView: View {
 			Form {
 				
 			/// New Number Plans
-                Section(header: Text("New Number Plans")) {
-                    Picker("New 24 Month $69", selection: $GiftCardAmountsViewModel.giftcard3Amount) {
+                Section(header: Text("JB Plans")) {
+                    Picker("$69", selection: $GiftCardAmountsViewModel.giftcard1Amount) {
                         ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
                             Text("$\($0)")
                         }
                     }
 
-                    Picker("New 24 Month $99", selection: $GiftCardAmountsViewModel.giftcard4Amount) {
+                    Picker("$99", selection: $GiftCardAmountsViewModel.giftcard2Amount) {
                         ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
                             Text("$\($0)")
 
                         }
                     }
                 }
-				
-				/// Port Number Plans
-				Section(header: Text("Port Number Plans")) {
-					Picker("Port 24 Month $69", selection: $GiftCardAmountsViewModel.giftcard7Amount) {
-						ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
-							Text("$\($0)")
-						}
-					}
-					
-					Picker("Port 24 Month $99", selection: $GiftCardAmountsViewModel.giftcard8Amount) {
-						ForEach(GiftCardAmountsViewModel.giftcardAmounts24, id: \.self) {
-							Text("$\($0)")
-						}
-					}
-				}
 				
 				
                 

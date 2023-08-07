@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var GiftCardAmountsViewModel = CalculatorViewModel()
     @StateObject var viewModel = CalculatorViewModel()
     @State var isPresented = false
     @State var phoneDealSheet = false
@@ -24,18 +23,22 @@ struct ContentView: View {
                         Spacer()
 
                         Text("$\(viewModel.oldPlanWithDevice, specifier: "%.2f")")
-                            .foregroundColor(viewModel.newPlanDeviceGiftcardMobileExtras >= viewModel.oldPlanWithDevice ? .green : .red)
+                            .foregroundColor(viewModel.newPlanWithDeviceAndGiftcard >= viewModel.oldPlanWithDevice ? .green : .red)
                     }
 
                     HStack {
-                        Text("New Plan")
+                        Text("JB Plan").foregroundStyle(.yellow)
                         Spacer()
-                        if viewModel.oldPlanWithDevice == 0 {
-                            Text("$\(viewModel.newPlanDeviceGiftcardMobileExtras, specifier: "%.2f")")
-                                .foregroundColor(.green)
+                        if viewModel.oldMonthlyPlanCost == 0 {
+                            Text("$0.00").foregroundStyle(.green)
                         } else {
-                            Text("$\(viewModel.newPlanDeviceGiftcardMobileExtras, specifier: "%.2f")")
-                                .foregroundColor(viewModel.newPlanDeviceGiftcardMobileExtras > viewModel.oldPlanWithDevice ? .red : .green)
+                            if viewModel.oldPlanWithDevice == 0 {
+                                Text("$\(viewModel.newPlanWithDeviceAndGiftcard, specifier: "%.2f")")
+                                    .foregroundColor(.green)
+                            } else {
+                                Text("$\(viewModel.newPlanWithDeviceAndGiftcard, specifier: "%.2f")")
+                                    .foregroundColor(viewModel.newPlanWithDeviceAndGiftcard > viewModel.oldPlanWithDevice ? .red : .green)
+                            }
                         }
                     }
                 }
@@ -55,7 +58,7 @@ struct ContentView: View {
                     }
 
                     HStack {
-                        Text("New Plan Total")
+                        Text("JB Plan Total").foregroundStyle(.yellow)
                         Spacer()
                         if viewModel.deviceWithGiftcard > 0 {
                             Text("$\(viewModel.deviceWithGiftcard, specifier: "%.2f")")
@@ -69,7 +72,7 @@ struct ContentView: View {
                 }
 
                 /// current monthly plan cost
-                Section(header: Text("How much do you currently spend a month $\(viewModel.oldMonthlyPlanCost, specifier: "%.2f")")) {
+                Section(header: Text("How much do you currently spend a month?")) {
                     TextField("Current Monthly Plan Cost", value: $viewModel.oldMonthlyPlanCost,
                               format: .number)
                     .keyboardType(.decimalPad)
@@ -85,8 +88,7 @@ struct ContentView: View {
                 }
 
                 /// New plan details
-                Section(header: Text("$\(viewModel.newMonthlyPlanCost, specifier: "%.2f") over \(viewModel.contractTerm) Months = $\(viewModel.newTotalSpend, specifier: "%.2f")\n$\(viewModel.calculatedMonthlySpend, specifier: "%.2f") per month")) {
-
+                Section {
                     if viewModel.giftcard == 0 {
                         Text("Please enter contract details")
                     } else {
@@ -101,26 +103,24 @@ struct ContentView: View {
                         }
                     }
 
-                    Picker("", selection: $viewModel.newOrPortSelection) {
-                        ForEach(viewModel.newOrPortOptions, id: \.self) {
-                            Text($0)
+
+                    Picker("New Monthly Plan", selection: $viewModel.newMonthlyPlanCost) {
+                        ForEach(viewModel.newMonthlyPlanPrice, id: \.self) {
+                            Text("$\($0, specifier: "%.0f")")
                         }
                     }
                     .pickerStyle(.segmented)
 
-                    if viewModel.newOrPortSelection != "" {
-                        Picker("New Monthly Plan", selection: $viewModel.newMonthlyPlanCost) {
-                            ForEach(viewModel.newMonthlyPlanPrice, id: \.self) {
-                                Text("$\($0, specifier: "%.0f")")
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                    }
 
                     if viewModel.newMonthlyPlanCost == 99.0 {
                         if viewModel.creditIsOn {
                             Text("$10 Credit Applied")
                         }
+                    }
+                } header: {
+                    VStack(alignment: .leading) {
+                        Text("$\(viewModel.newMonthlyPlanCost, specifier: "%.2f") over \(viewModel.contractTerm) Months = $\(viewModel.newTotalSpend, specifier: "%.2f")")
+                        Text("$\(viewModel.calculatedMonthlySpend, specifier: "%.2f") per month*")
                     }
                 }
             }
@@ -155,6 +155,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .preferredColorScheme(.dark)
-        
+
     }
 }
